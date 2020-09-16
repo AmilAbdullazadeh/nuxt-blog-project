@@ -11,21 +11,11 @@ export default {
   components: {
     PostList,
   },
-  asyncData(context, callback) {
-    setTimeout(() => {
-      callback(null, {
-        fetchedPosts: [
-          {
-            id: 1,
-            title: "Test title",
-            subTitle: "Test title",
-            text: "Test test",
-            author: "Amil",
-          },
-        ],
-      });
-    }, 1000);
-  },
+  computed: {
+    fetchedPosts() {
+      return this.$store.getters.getPosts
+    }
+  }
 };
 </script>
 

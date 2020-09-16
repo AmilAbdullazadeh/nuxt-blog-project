@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import PostForm from "@/components/admin/PostForm";
 export default {
   components: {
@@ -10,7 +11,10 @@ export default {
   },
   methods: {
     savePost(post) {
-      console.log(post);
+      this.$store.dispatch("addPost", post)
+      .then((res) => {
+        this.$router.push("/admin")
+      })
     },
   },
 };

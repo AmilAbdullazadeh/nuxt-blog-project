@@ -3,25 +3,19 @@
 </template>
 
 <script>
+import axios from "axios";
 import PostDetail from "@/components/post/PostDetail";
 export default {
   components: {
     PostDetail,
   },
-  asyncData(context, callback) {
-    setTimeout(() => {
-      callback(null, {
-        fetchedPost: [
-          {
-            id: 1,
-            title: "Test title, ID is : " + context.params.postId,
-            subTitle: "Test title",
-            text: "Test test",
-            author: "Amil",
-          },
-        ],
-      });
-    }, 2000);
+  asyncData(context) {
+    return axios.get("https://nuxt-project-dallas.firebaseio.com/posts/" + context.params.postId + ".json")
+    .then(response => {
+      return {
+        fetchedPost: response.data
+      }
+    })
   },
 };
 </script>

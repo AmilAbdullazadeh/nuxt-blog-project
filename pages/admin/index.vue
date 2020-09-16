@@ -3,7 +3,9 @@
     <div class="container d-flex justify-content-center align-items-center">
       <button @click.prevent="$router.push('/admin/new-post')" class="btn btn-dark">Add new Post</button>
     </div>
-    <PostList :isAdmin="true" />
+    <PostList
+        :posts="fetchedPosts"
+        :isAdmin="true" />
   </div>
 </template>
 
@@ -14,5 +16,10 @@ export default {
   components: {
     PostList,
   },
+  computed: {
+    fetchedPosts() {
+      return this.$store.getters.getPosts
+    }
+  }
 };
 </script>
